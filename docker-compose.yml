@@ -16,7 +16,9 @@ services:
       - '/srv/gitlab/logs:/var/log/gitlab'
       - '/srv/gitlab/data:/var/opt/gitlab'
     networks:
-      - 'default'
+      default:
+        aliases:
+          - 'gitlab.localhost.com'
 
   gitlab-runner:
     image: 'gitlab/gitlab-runner:latest'
@@ -28,8 +30,6 @@ services:
       - '/var/run/docker.sock:/var/run/docker.sock'
     networks:
       - 'default'
-    links:
-      - 'gitlab:gitlab.localhost.com'
 
 networks:
   default:
